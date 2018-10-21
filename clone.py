@@ -59,11 +59,14 @@ validation_generator = generator(validation_samples , batch_size = 64)
 
 model = Sequential()
 
+# data pre-processing layers
+
+model.add(Cropping2D(cropping=((50,20),(0,0)) , input_shape=(160,320,3)))    # cropping to focus on the road section 
 
 
 # convolutional layers
 
-model.add(Conv2D(filters=6 , kernel_size=5 , strides=1 , padding='valid' , input_shape=(160,320,3)))
+model.add(Conv2D(filters=6 , kernel_size=5 , strides=1 , padding='valid'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
 model.add(Conv2D(filters=16 , kernel_size=5 , strides=1 , padding='valid'))
