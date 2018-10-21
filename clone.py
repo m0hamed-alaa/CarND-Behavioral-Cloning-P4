@@ -62,7 +62,7 @@ model = Sequential()
 # data pre-processing layers
 
 model.add(Cropping2D(cropping=((50,20),(0,0)) , input_shape=(160,320,3)))    # cropping to focus on the road section 
-
+model.add(Lambda(lambda x : (x/255.0) - 0.5 ))                                # normalization
 
 # convolutional layers
 
