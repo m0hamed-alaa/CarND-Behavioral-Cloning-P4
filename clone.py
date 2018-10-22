@@ -70,18 +70,25 @@ model.add(Lambda(lambda x : (x/255.0) - 0.5 ))                                # 
 
 # convolutional layers
 
-model.add(Conv2D(filters=6 , kernel_size=5 , strides=1 , padding='valid'))
+model.add(Conv2D(filters=24 , kernel_size=5 , strides=2 , padding='valid'))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
-model.add(Conv2D(filters=16 , kernel_size=5 , strides=1 , padding='valid'))
+model.add(Conv2D(filters=36 , kernel_size=5 , strides=2 , padding='valid'))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
+model.add(Conv2D(filters=48 , kernel_size=5 , strides=2 , padding='valid'))
+model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
+model.add(Conv2D(filters=64 , kernel_size=3 , strides=1 , padding='valid'))
+model.add(Activation('relu'))
+model.add(Conv2D(filters=64 , kernel_size=3 , strides=1 , padding='valid'))
+model.add(Activation('relu'))
+#model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
 
 # fully_connected layers
 
 model.add(Flatten())
-model.add(Dense(units=120 , activation='relu'))
-model.add(Dense(units=84 , activation='relu'))
+model.add(Dense(units=100 , activation='relu'))
+model.add(Dense(units=50 , activation='relu'))
+model.add(Dense(units=10 , activation='relu'))
 model.add(Dense(units=1))
 
 # configure the training process
