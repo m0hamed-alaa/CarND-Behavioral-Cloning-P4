@@ -43,8 +43,12 @@ def generator( samples , batch_size=32 ) :
 				current_path = source_path+batch_sample[0].split('/')[-1]
 				center_image = ndimage.imread(current_path)
 				center_angle = float(batch_sample[3])
+				flipped_image  = np.fliplr(center_image)
+				reversed_angle = -center_angle
 				images.append(center_image)
+				images.append(flipped_image)
 				angles.append(center_angle)
+				angles.append(reversed_angle)
 
 			X_data = np.array(images)
 			y_data = np.array(angles)
