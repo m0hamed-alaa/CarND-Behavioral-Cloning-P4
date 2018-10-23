@@ -36,19 +36,26 @@ def generator( samples , batch_size=32 ) :
 		for offset in range(0 , num_samples , batch_size) :
 			batch_samples = samples[offset : offset + batch_size]
 
+			correction=0.15
+			
 			images = []
 			angles = []
+
 			for batch_sample in batch_samples :
 				source_path = './data/IMG/'
-				current_path = source_path+batch_sample[0].split('/')[-1]
-				center_image = ndimage.imread(current_path)
+				center_image = ndimage.imread(source_path+batch_sample[0].split('/')[-1])
+				left_image   = ndimage.imread(source_path+batch_sample[1].split('/')[-1])
+				right_image  = ndimage.imread(source_path+batch_sample[2].split('/')[-1])
+				
 				center_angle = float(batch_sample[3])
+				left_angle   = center_angle + correction
+				right_angle  = center_angle - correction
+
 				flipped_image  = np.fliplr(center_image)
-				reversed_angle = -center_angle
-				images.append(center_image)
-				images.append(flipped_image)
-				angles.append(center_angle)
-				angles.append(reversed_angle)
+				flipped_angle = -center_angle
+				
+				images.extend([ center_image , left_image , right_image , flipped_image ])
+				angles.extend([ center_angle , left_angle , right_angle , flipped_angle ])
 
 			X_data = np.array(images)
 			y_data = np.array(angles)
