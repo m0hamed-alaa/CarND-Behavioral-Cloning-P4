@@ -4,6 +4,7 @@ from scipy import ndimage
 import numpy as np
 import os 
 import csv 
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
@@ -104,10 +105,21 @@ model.compile(loss='mse' , optimizer='adam')
 
 # train the model
 
-model.fit_generator(train_generator , steps_per_epoch=len(train_samples)/64 , epochs=5 , validation_data = validation_generator , validation_steps=len(validation_samples)/64 )
+history_object = model.fit_generator(train_generator , steps_per_epoch=len(train_samples)/64 , epochs=5 , validation_data = validation_generator , validation_steps=len(validation_samples)/64 )
 
 #model.fit_generator(train_generator, steps_per_epoch= len(train_samples), 
 #validation_data=validation_generator, validation_steps=len(validation_samples), epochs=5, verbose = 1)
+
+# loss visualization
+
+plt.plot(history_object.history['loss'])
+plt.plot(history_object.history['val_loss'])
+plt.xlabel('epoch')
+plt.ylabel('mean squared error loss')
+plt.title('loss during training')
+plt.legend(['train_loss' , 'valid_loss'] , loc='upper right')
+plt.savefig('visualizing_loss.png')
+
 # save the model
 
 model.save('model.h5')
