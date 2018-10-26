@@ -84,12 +84,11 @@ model.add(Conv2D(filters=36 , kernel_size=5 , strides=2 , padding='valid'))
 model.add(Activation('relu'))
 model.add(Conv2D(filters=48 , kernel_size=5 , strides=2 , padding='valid'))
 model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
+
 model.add(Conv2D(filters=64 , kernel_size=3 , strides=1 , padding='valid'))
 model.add(Activation('relu'))
 model.add(Conv2D(filters=64 , kernel_size=3 , strides=1 , padding='valid'))
 model.add(Activation('relu'))
-#model.add(MaxPooling2D(pool_size=2 , strides=2 , padding='valid'))
 
 # fully_connected layers
 
@@ -107,8 +106,6 @@ model.compile(loss='mse' , optimizer='adam')
 
 history_object = model.fit_generator(train_generator , steps_per_epoch=len(train_samples)/64 , epochs=5 , validation_data = validation_generator , validation_steps=len(validation_samples)/64 )
 
-#model.fit_generator(train_generator, steps_per_epoch= len(train_samples), 
-#validation_data=validation_generator, validation_steps=len(validation_samples), epochs=5, verbose = 1)
 
 # loss visualization
 
