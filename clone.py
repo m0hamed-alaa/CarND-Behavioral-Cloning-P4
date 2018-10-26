@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 from keras.models import Sequential
-from keras.layers import Flatten , Dense , Conv2D , MaxPooling2D , Activation , Cropping2D , Lambda
+from keras.layers import Flatten , Dense , Conv2D , MaxPooling2D , Activation , Cropping2D , Lambda , Dropout
 
 
 # parse driving_log.csv 
@@ -93,6 +93,7 @@ model.add(Activation('relu'))
 # fully_connected layers
 
 model.add(Flatten())
+model.add(Dropout(0.2))
 model.add(Dense(units=100 , activation='relu'))
 model.add(Dense(units=50 , activation='relu'))
 model.add(Dense(units=10 , activation='relu'))
