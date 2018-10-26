@@ -103,6 +103,10 @@ model.add(Dense(units=1))
 
 model.compile(loss='mse' , optimizer='adam')
 
+# summarize the model
+
+model.summary()
+
 # train the model
 
 history_object = model.fit_generator(train_generator , steps_per_epoch=len(train_samples)/64 , epochs=5 , validation_data = validation_generator , validation_steps=len(validation_samples)/64 )
