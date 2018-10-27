@@ -1,7 +1,9 @@
 # **Behavioral Cloning for self-driving cars** 
 
 In this project, A convolutional neural network is used to clone driving behavior. The model is trained, validated and tested using Keras. The model will output a steering angle to an autonomous vehicle.
+
 ---
+
 **The goals / steps of this project are the following:**
 * Use the simulator to collect data of good driving behavior
 * Build, a convolution neural network in Keras that predicts steering angles from images
@@ -34,6 +36,8 @@ In this project, A convolutional neural network is used to clone driving behavio
 * `drive.py` for driving the car in autonomous mode
 * `model.h5` containing a trained convolution neural network 
 * `writeup.md` summarizing the results
+* `autonomous_driving.mp4` which is a video recording of the vehicle driving autonomously around the track for one full lap
+
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
