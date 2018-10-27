@@ -2,7 +2,6 @@
 
 from scipy import ndimage
 import numpy as np
-import os 
 import csv 
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -26,6 +25,70 @@ with open("./data/driving_log.csv") as csv_file :
 # divide samples into train_samples and validation_samples
 
 train_samples , validation_samples = train_test_split(samples , test_size = 0.2)
+
+# plot sample images 
+
+def plot_samples(samples , label) :
+	'''
+	This function plots sample images from the data set
+	label argument determines whether 'center' or 'center and left and right' or 'center and flipped'
+	images are visulaized
+	''' 
+
+	if label == 'center' :
+		f , axes = plt.subplots(3,3 , figsize=(10,6))
+		for i in range(9):
+			idx = np.random.randint(len(samples))
+			axes = axes.ravel()
+			source_path = './data/IMG/'
+			image_path = source_path + train_samples[idx][0].split('/')[-1]
+			image = mpimg.imread(image_path)
+			axes[i].imshow(image)
+			axes[i].axis('off')
+			axes[i].set_title('center')
+		f.subplots_adjust(hspace = 0.001 , wspace= 0.2)
+		f.savefig('./examples/center_images.png')
+
+	elif label == 'all' :
+		f , axes = plt.subplots(3,3 , figsize=(10,6))
+		for i in range(3):
+			idx = np.random.randint(len(samples))
+			source_path = './data/IMG/'
+			titles = ['center' , 'left' , 'right']
+			for j in range(3) :
+				image_path = source_path + samples[idx][j].split('/')[-1]
+				image = mpimg.imread(image_path)
+				axes[i][j].imshow(image)
+				axes[i][j].axis('off')
+				axes[i][j].set_title(titles[j])
+		f.subplots_adjust(hspace = 0.001 , wspace= 0.2)
+		f.savefig('./examples/camera_images.png')
+
+	elif label == 'flip' :
+		f , axes = plt.subplots(3,2 , figsize=(10,6))
+		for i in range(3):
+			idx = np.random.randint(len(samples))
+			source_path = './data/IMG/'
+			for j in range(2) :
+				image_path = source_path + samples[idx][0].split('/')[-1]
+				image = mpimg.imread(image_path)
+				flipped_image = np.fliplr(image)
+				img = flipped_image if (j+1)%2 == 0 else image
+				title = 'flipped' if (j+1)%2 == 0 else 'original'
+				axes[i][j].imshow(img)
+				axes[i][j].axis('off')
+				axes[i][j].set_title(title)
+		f.subplots_adjust(hspace = 0.001 , wspace= 0.2)
+		f.savefig('./examples/flipped_images.png')
+
+		
+
+	plt.show()
+
+
+plot_samples(train_samples , 'center')
+plot_samples(train_samples , 'all')
+plot_samples(train_samples , 'flip')
 
 # create data generator
 
